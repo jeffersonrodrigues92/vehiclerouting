@@ -13,12 +13,11 @@ import java.util.Objects;
 @RequestMapping("/client")
 public class ClientController {
 
-
     @Autowired
     private ClientService clientService;
 
-    @PostMapping("/save")
-    public ResponseEntity<Void> save(@RequestBody Client client){
+    @PostMapping("/create")
+    public ResponseEntity<Void> create(@RequestBody Client client){
         clientService.save(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -36,8 +35,8 @@ public class ClientController {
     public ResponseEntity<Client>getClient(@PathVariable(value = "id") Long id){
         Client client = clientService.get(id);
         if(Objects.nonNull(client)){
-            return new ResponseEntity<Client>(client, HttpStatus.OK);
+            return new ResponseEntity<>(client, HttpStatus.OK);
         }
-        return new ResponseEntity<Client>(client, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(client, HttpStatus.NOT_FOUND);
     }
 }

@@ -2,6 +2,8 @@ package br.com.ifood.vehiclerouting.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "restaurant")
@@ -10,12 +12,12 @@ public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Order order;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Client client;
-    private String picked;
-    private String delivery;
+    @NotNull
+    @Size(min=1)
+    private String lat;
+    @NotNull
+    @Size(min=1)
+    private String lon;
 
     public Long getId() {
         return id;
@@ -25,35 +27,19 @@ public class Restaurant {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public String getLat() {
+        return lat;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setLat(String lat) {
+        this.lat = lat;
     }
 
-    public Client getClient() {
-        return client;
+    public String getLon() {
+        return lon;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public String getPicked() {
-        return picked;
-    }
-
-    public void setPicked(String picked) {
-        this.picked = picked;
-    }
-
-    public String getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(String delivery) {
-        this.delivery = delivery;
+    public void setLon(String lon) {
+        this.lon = lon;
     }
 }

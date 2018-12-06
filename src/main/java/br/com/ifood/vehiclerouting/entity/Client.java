@@ -1,6 +1,8 @@
 package br.com.ifood.vehiclerouting.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "client")
@@ -9,7 +11,11 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min=1)
     private String lat;
+    @NotNull
+    @Size(min=1)
     private String lon;
 
     public Long getId() {

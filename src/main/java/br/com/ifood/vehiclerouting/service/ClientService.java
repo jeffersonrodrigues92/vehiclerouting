@@ -3,12 +3,8 @@ package br.com.ifood.vehiclerouting.service;
 import br.com.ifood.vehiclerouting.entity.Client;
 import br.com.ifood.vehiclerouting.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ClientService {
