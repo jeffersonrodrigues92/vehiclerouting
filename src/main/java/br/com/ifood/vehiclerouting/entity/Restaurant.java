@@ -3,7 +3,6 @@ package br.com.ifood.vehiclerouting.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "restaurant")
@@ -13,11 +12,9 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min=1)
-    private String lat;
+    private Double lat;
     @NotNull
-    @Size(min=1)
-    private String lon;
+    private Double lon;
 
     public Long getId() {
         return id;
@@ -27,19 +24,19 @@ public class Restaurant {
         this.id = id;
     }
 
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public String getLon() {
+    public Double getLon() {
         return lon;
     }
 
-    public void setLon(String lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 }

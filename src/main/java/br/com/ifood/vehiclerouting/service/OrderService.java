@@ -11,9 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Objects;
 
 @Service
@@ -29,9 +26,6 @@ public class OrderService {
     private RestaurantRepository restaurantRepository;
 
     public ResponseEntity<Void> create (Orders order) {
-
-        order.setPickup(new Date());
-        order.setDelivery(Date.from(LocalDateTime.now().plusHours(1).atZone(ZoneId.systemDefault()).toInstant()));
 
         Client client = clientRepository.findById(order.getClient()).orElse(null);
         Restaurant restaurant = restaurantRepository.findById(order.getRestaurant()).orElse(null);

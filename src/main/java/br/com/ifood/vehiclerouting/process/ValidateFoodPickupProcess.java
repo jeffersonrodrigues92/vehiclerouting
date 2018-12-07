@@ -9,21 +9,20 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class ValidateFoodPickup implements IfoodProcess {
+public class ValidateFoodPickupProcess extends IfoodProcess {
 
     private IfoodProcess nextIfoodProcess;
 
     @Autowired
     private OrderRepository orderRepository;
 
-    public List process(Object...orders) throws IfoodProcessException {
-
+    public List process() throws IfoodProcessException {
         Iterable<Orders> ordersList = orderRepository.findAll();
         List<Orders> ordersReady = new ArrayList<>();
 
         ordersList.forEach(order ->{
             if(new Date().equals(order.getPickup()) || new Date().after(order.getPickup())){
-                 ordersReady.add(order);
+                ordersReady.add(order);
             }
         });
 
@@ -33,6 +32,7 @@ public class ValidateFoodPickup implements IfoodProcess {
 
         return ordersReady;
     }
+
 
     public void setNextIfoodProcess(IfoodProcess ifoodProcess) {
         nextIfoodProcess = ifoodProcess;

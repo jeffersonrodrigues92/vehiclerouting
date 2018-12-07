@@ -2,7 +2,6 @@ package br.com.ifood.vehiclerouting.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -18,7 +17,9 @@ public class Orders {
     @NotNull
     @Column(name = "client_id")
     private Long client;
+    @NotNull
     private Date pickup;
+    @NotNull
     private Date delivery;
 
     public Long getId() {

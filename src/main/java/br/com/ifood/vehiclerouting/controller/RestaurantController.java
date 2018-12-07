@@ -16,13 +16,13 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
-    @PostMapping("/save")
+    @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestBody Restaurant restaurant){
         restaurantService.save(restaurant);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/create")
+    @PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody Restaurant restaurant){
         Long id = restaurantService.update(restaurant);
         if(Objects.nonNull(id)) {
