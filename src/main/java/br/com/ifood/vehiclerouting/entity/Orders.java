@@ -12,11 +12,13 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Column(name = "restaurant_id")
-    private Long restaurant;
+    @JoinColumn(name = "restaurant_id")
+    @ManyToOne
+    private Restaurant restaurant;
     @NotNull
-    @Column(name = "client_id")
-    private Long client;
+    @JoinColumn(name = "client_id")
+    @ManyToOne
+    private Client client;
     @NotNull
     private Date pickup;
     @NotNull
@@ -30,19 +32,19 @@ public class Orders {
         this.id = id;
     }
 
-    public Long getRestaurant() {
+    public Restaurant getRestaurant() {
         return restaurant;
     }
 
-    public void setRestaurant(Long restaurant) {
+    public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
 
-    public Long getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(Long client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 

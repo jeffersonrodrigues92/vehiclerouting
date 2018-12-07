@@ -27,8 +27,8 @@ public class OrderService {
 
     public ResponseEntity<Void> create (Orders order) {
 
-        Client client = clientRepository.findById(order.getClient()).orElse(null);
-        Restaurant restaurant = restaurantRepository.findById(order.getRestaurant()).orElse(null);
+        Client client = clientRepository.findById(order.getClient().getId()).orElse(null);
+        Restaurant restaurant = restaurantRepository.findById(order.getRestaurant().getId()).orElse(null);
         if (Objects.isNull(client) || Objects.isNull(restaurant))
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 

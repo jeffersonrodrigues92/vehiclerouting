@@ -1,9 +1,10 @@
 package br.com.ifood.vehiclerouting.controller;
 
-import br.com.ifood.vehiclerouting.bean.RoutesBean;
-import br.com.ifood.vehiclerouting.bean.ResponseBean;
+import br.com.ifood.vehiclerouting.bean.RouteBean;
 import br.com.ifood.vehiclerouting.entity.Orders;
 import br.com.ifood.vehiclerouting.exception.IfoodProcessException;
+import br.com.ifood.vehiclerouting.process.AddOrdersDriverProcess;
+import br.com.ifood.vehiclerouting.process.AddOrdersSameRestaurant;
 import br.com.ifood.vehiclerouting.process.CalculateRouteDeliveryProcess;
 import br.com.ifood.vehiclerouting.process.ValidateFoodPickupProcess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/routes")
@@ -27,22 +29,27 @@ public class RouteController {
      @Autowired
      private CalculateRouteDeliveryProcess calculateRouteDeliveryProcess;
 
+     @Autowired
+     private AddOrdersSameRestaurant addOrdersSameRestaurant;
+
+     @Autowired
+     private AddOrdersDriverProcess addOrdersDriverProcess;
+
+
+
      @GetMapping
-     public ResponseEntity<ResponseBean> routes () throws IfoodProcessException {
+     public ResponseEntity<List<RouteBean>> routes () throws IfoodProcessException {
 
           validateFoodPickupProcess.setNextIfoodProcess(calculateRouteDeliveryProcess);
+          calculateRouteDeliveryProcess.setNextIfoodProcess(addOrdersSameRestaurant);
+          addOrdersSameRestaurant.setNextIfoodProcess(addOrdersDriverProcess);
 
           List<Orders> orders = validateFoodPickupProcess.process();
-          List<RoutesBean> routes = calculateRouteDeliveryProcess.process(orders);
+          List<RouteBean> routesCalculated = calculateRouteDeliveryProcess.process(orders);
+          Set<ArrayList<RouteBean>> routesSameRestaurantsOrders = addOrdersSameRestaurant.process(routesCalculated);
+          addOrdersDriverProcess.process(routesSameRestaurantsOrders);
 
-
-          ResponseBean teste = new ResponseBean();
-          List<RoutesBean> routesBeansList = new ArrayList<>();
-          routesBeansList.addAll(routes);
-
-          teste.setRoutes(routesBeansList);
-
-          return new ResponseEntity<>(teste, HttpStatus.OK);
+          return new ResponseEntity<>(routesCalculated, HttpStatus.OK);
 
      }
 
