@@ -55,9 +55,9 @@ Qual foi a linha de raciocínio?
 
 - 2- Foi desenvolvido um algoritmo que calcula a distância entre todos os restaurantes e clientes separadamente, tendo como regras 5 minutos para cada 0.1 unidades percorrido.
 
-- 3- Após o cálculo de todos os pedidos entre a distância do cliente e restaurante, o sistema atribue todos os pedidos de cada restaurante para sua respectiva lista de entregas, assim é possível identificar quantos pedidos cada restaurante tem para ser entregues.
+- 3- Após o cálculo de todos os pedidos entre a distância do cliente e restaurante, o sistema atribui todos os pedidos de cada restaurante para sua respectiva lista de entregas, assim é possível identificar quantos pedidos cada restaurante tem para ser entregues.
 
-- 4- Respeitando o horário de entrega dos pedidos e tendo a lista de pedidos por restaurante, o sistema ordena essa lista pelo menor distância para o pedido ser entregue do restaurante até o cliente. 
+- 4- Respeitando o horário de entrega dos pedidos e tendo a lista de pedidos por restaurante, o sistema ordena essa lista pela menor distância para o pedido ser entregue do restaurante até o cliente. 
 
 - 5- Depois de ordenar a lista e saber quais são os clientes que estão mais pertos do restaurante para entrega, eu atribuo para cada entregador 3 pedidos do mesmo restaurante, quando há mais de 3 pedidos eu solicito um novo entregador para entregar o restante.
 
