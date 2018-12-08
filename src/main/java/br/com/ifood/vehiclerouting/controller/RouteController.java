@@ -1,8 +1,7 @@
 package br.com.ifood.vehiclerouting.controller;
 
-import br.com.ifood.vehiclerouting.bean.RouteBean;
+import br.com.ifood.vehiclerouting.response.RouteStatsResponse;
 import br.com.ifood.vehiclerouting.entity.Orders;
-import br.com.ifood.vehiclerouting.exception.IfoodProcessException;
 import br.com.ifood.vehiclerouting.process.AddOrdersDriverProcess;
 import br.com.ifood.vehiclerouting.process.AddOrdersSameRestaurant;
 import br.com.ifood.vehiclerouting.process.CalculateRouteDeliveryProcess;
@@ -40,15 +39,15 @@ public class RouteController {
 
 
      @GetMapping
-     public ResponseEntity routes() throws IfoodProcessException {
+     public ResponseEntity routes(){
 
           validateFoodPickupProcess.setNextIfoodProcess(calculateRouteDeliveryProcess);
           calculateRouteDeliveryProcess.setNextIfoodProcess(addOrdersSameRestaurant);
           addOrdersSameRestaurant.setNextIfoodProcess(addOrdersDriverProcess);
 
           List<Orders> ordersAvailable = validateFoodPickupProcess.process();
-          List<RouteBean> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
-          Set<ArrayList<RouteBean>> routesSameRestaurantsOrders = addOrdersSameRestaurant.process(routesCalculated);
+          List<RouteStatsResponse> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
+          Set<ArrayList<RouteStatsResponse>> routesSameRestaurantsOrders = addOrdersSameRestaurant.process(routesCalculated);
           List<OrderResponse> ordersSameRestaurants = addOrdersDriverProcess.process(routesSameRestaurantsOrders);
 
           if (ordersSameRestaurants.isEmpty()) {
@@ -66,12 +65,12 @@ public class RouteController {
 
 
      @GetMapping("/stats")
-     public ResponseEntity stats() throws IfoodProcessException {
+     public ResponseEntity stats(){
 
           validateFoodPickupProcess.setNextIfoodProcess(calculateRouteDeliveryProcess);
 
           List<Orders> ordersAvailable = validateFoodPickupProcess.process();
-          List<RouteBean> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
+          List<RouteStatsResponse> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
 
           if (routesCalculated.isEmpty()) {
                Response response = new Response();

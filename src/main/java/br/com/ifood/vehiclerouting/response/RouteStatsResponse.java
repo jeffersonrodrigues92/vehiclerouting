@@ -1,9 +1,9 @@
-package br.com.ifood.vehiclerouting.bean;
+package br.com.ifood.vehiclerouting.response;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class RouteBean {
+public class RouteStatsResponse {
 
     private Long id;
     private Long restaurantId;

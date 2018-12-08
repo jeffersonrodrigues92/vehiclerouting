@@ -1,8 +1,7 @@
 package br.com.ifood.vehiclerouting.process;
 
-import br.com.ifood.vehiclerouting.bean.RouteBean;
+import br.com.ifood.vehiclerouting.response.RouteStatsResponse;
 import br.com.ifood.vehiclerouting.entity.Orders;
-import br.com.ifood.vehiclerouting.exception.IfoodProcessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,13 +17,13 @@ public class CalculateRouteDeliveryProcess extends IfoodProcess {
     private static final Double UNIT_DISTANCE = 0.1;
     private static final Integer MINUTES_PER_UNIT= 5;
 
-    public List<RouteBean> process(List<Orders> orders) throws IfoodProcessException {
+    public List<RouteStatsResponse> process(List<Orders> orders) {
 
-        List<RouteBean> routes = new ArrayList<>();
+        List<RouteStatsResponse> routes = new ArrayList<>();
 
         orders.forEach(order -> {
 
-            RouteBean routesBean = new RouteBean();
+            RouteStatsResponse routesBean = new RouteStatsResponse();
             LocalDateTime date = order.getPickup().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
             routesBean.setId(order.getId());

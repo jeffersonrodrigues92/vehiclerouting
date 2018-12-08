@@ -1,7 +1,6 @@
 package br.com.ifood.vehiclerouting.process;
 
-import br.com.ifood.vehiclerouting.bean.RouteBean;
-import br.com.ifood.vehiclerouting.exception.IfoodProcessException;
+import br.com.ifood.vehiclerouting.response.RouteStatsResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -11,22 +10,22 @@ public class AddOrdersSameRestaurant extends IfoodProcess {
 
     private IfoodProcess nextIfoodProcess;
 
-    public Set<ArrayList<RouteBean>> process(List<RouteBean> routesCalculated) throws IfoodProcessException {
+    public Set<ArrayList<RouteStatsResponse>> process(List<RouteStatsResponse> routesCalculated) {
 
-        Set<ArrayList<RouteBean>> orderSameRestaurants = new HashSet<>();
-        ArrayList<RouteBean> ordersSameRestaurantsId = new ArrayList<>();
+        Set<ArrayList<RouteStatsResponse>> orderSameRestaurants = new HashSet<>();
+        ArrayList<RouteStatsResponse> ordersSameRestaurantsId = new ArrayList<>();
 
         //ADICIONANDO EM UM ARRAY TODOS OS PEDIDOS DO MESMO RESTAURANTE
-        for(RouteBean order : routesCalculated){
+        for(RouteStatsResponse order : routesCalculated){
             ordersSameRestaurantsId = new ArrayList<>();
-            for(RouteBean ordersSameRestaurant : routesCalculated){
+            for(RouteStatsResponse ordersSameRestaurant : routesCalculated){
                 if(order.getRestaurantId() == ordersSameRestaurant.getRestaurantId()){
                     ordersSameRestaurantsId.add(ordersSameRestaurant);
                 }
             }
             //ORDERNANDO OS PEDIDOS PARA A MENOR DISTANCIA ENTRE RESTAURANTE E CLIENTES
-            ordersSameRestaurantsId.sort(new Comparator<RouteBean>() {
-                public int compare(RouteBean routeBean1, RouteBean routeBean2) {
+            ordersSameRestaurantsId.sort(new Comparator<RouteStatsResponse>() {
+                public int compare(RouteStatsResponse routeBean1, RouteStatsResponse routeBean2) {
                     return routeBean1.getDistance().compareTo(routeBean2.getDistance());
                 }
             });

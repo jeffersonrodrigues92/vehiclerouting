@@ -1,8 +1,7 @@
 package br.com.ifood.vehiclerouting.process;
 
 
-import br.com.ifood.vehiclerouting.bean.RouteBean;
-import br.com.ifood.vehiclerouting.exception.IfoodProcessException;
+import br.com.ifood.vehiclerouting.response.RouteStatsResponse;
 import br.com.ifood.vehiclerouting.response.OrderResponse;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +16,14 @@ public class AddOrdersDriverProcess extends  IfoodProcess{
 
     private static final Integer ORDERS_PER_DRIVER = 3;
 
-    public List<OrderResponse> process(Set<ArrayList<RouteBean>> routesSameRestaurantsOrders) throws IfoodProcessException {
+    public List<OrderResponse> process(Set<ArrayList<RouteStatsResponse>> routesSameRestaurantsOrders) {
 
         List<OrderResponse> ordersDelivery = new ArrayList<>();
         List<Long> orderByRestaurants = null;
 
-        for(ArrayList<RouteBean> route : routesSameRestaurantsOrders){
+        for(ArrayList<RouteStatsResponse> route : routesSameRestaurantsOrders){
             orderByRestaurants = new ArrayList<>();
-            for(RouteBean routeBean : route){
+            for(RouteStatsResponse routeBean : route){
                 if(orderByRestaurants.size() == ORDERS_PER_DRIVER) {
                     break;
                 }

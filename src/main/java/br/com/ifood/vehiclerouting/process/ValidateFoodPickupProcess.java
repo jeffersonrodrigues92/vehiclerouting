@@ -1,10 +1,8 @@
 package br.com.ifood.vehiclerouting.process;
 
 import br.com.ifood.vehiclerouting.entity.Orders;
-import br.com.ifood.vehiclerouting.exception.IfoodProcessException;
 import br.com.ifood.vehiclerouting.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,7 +15,7 @@ public class ValidateFoodPickupProcess extends IfoodProcess {
     @Autowired
     private OrderRepository orderRepository;
 
-    public List<Orders> process() throws IfoodProcessException {
+    public List<Orders> process(){
         Iterable<Orders> ordersList = orderRepository.findAll();
         List<Orders> ordersReady = new ArrayList<>();
 
