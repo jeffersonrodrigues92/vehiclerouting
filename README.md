@@ -1,6 +1,6 @@
 ## Problema de Roteamento de Veículos
 
-Problema de roteamento de veículos, tendo como solução a menor rota entre o restaurantes e clientes.
+Problema de roteamento de veículos, tendo como solução a menor rota entre os restaurantes e clientes.
 
 Segue as informações especificado no problema:
 
