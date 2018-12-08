@@ -7,6 +7,9 @@ import br.com.ifood.vehiclerouting.process.AddOrdersDriverProcess;
 import br.com.ifood.vehiclerouting.process.AddOrdersSameRestaurant;
 import br.com.ifood.vehiclerouting.process.CalculateRouteDeliveryProcess;
 import br.com.ifood.vehiclerouting.process.ValidateFoodPickupProcess;
+import br.com.ifood.vehiclerouting.response.OrderResponse;
+import br.com.ifood.vehiclerouting.response.Response;
+import br.com.ifood.vehiclerouting.response.RouteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,22 +39,48 @@ public class RouteController {
      private AddOrdersDriverProcess addOrdersDriverProcess;
 
 
-
      @GetMapping
-     public ResponseEntity<List<RouteBean>> routes () throws IfoodProcessException {
+     public ResponseEntity routes() throws IfoodProcessException {
 
           validateFoodPickupProcess.setNextIfoodProcess(calculateRouteDeliveryProcess);
           calculateRouteDeliveryProcess.setNextIfoodProcess(addOrdersSameRestaurant);
           addOrdersSameRestaurant.setNextIfoodProcess(addOrdersDriverProcess);
 
-          List<Orders> orders = validateFoodPickupProcess.process();
-          List<RouteBean> routesCalculated = calculateRouteDeliveryProcess.process(orders);
+          List<Orders> ordersAvailable = validateFoodPickupProcess.process();
+          List<RouteBean> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
           Set<ArrayList<RouteBean>> routesSameRestaurantsOrders = addOrdersSameRestaurant.process(routesCalculated);
-          addOrdersDriverProcess.process(routesSameRestaurantsOrders);
+          List<OrderResponse> ordersSameRestaurants = addOrdersDriverProcess.process(routesSameRestaurantsOrders);
 
-          return new ResponseEntity<>(routesCalculated, HttpStatus.OK);
+          if (ordersSameRestaurants.isEmpty()) {
+               Response response = new Response();
+               response.setMessage("Não foi encontrado nenhum pedido pronto.");
+               response.setCode(HttpStatus.NOT_FOUND.value());
+               return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+          }
 
+          RouteResponse routes = new RouteResponse();
+          routes.setRoutes(ordersSameRestaurants);
+
+          return new ResponseEntity<>(routes, HttpStatus.OK);
      }
 
+
+     @GetMapping("/stats")
+     public ResponseEntity stats() throws IfoodProcessException {
+
+          validateFoodPickupProcess.setNextIfoodProcess(calculateRouteDeliveryProcess);
+
+          List<Orders> ordersAvailable = validateFoodPickupProcess.process();
+          List<RouteBean> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
+
+          if (routesCalculated.isEmpty()) {
+               Response response = new Response();
+               response.setMessage("Não foi encontrado nenhum pedido pronto.");
+               response.setCode(HttpStatus.NOT_FOUND.value());
+               return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+          }
+
+          return new ResponseEntity<>(routesCalculated, HttpStatus.OK);
+     }
 
 }

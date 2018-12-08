@@ -8,7 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/order")
@@ -28,6 +31,15 @@ public class OrderController {
             return new ResponseEntity<>(order, HttpStatus.OK);
         }
         return new ResponseEntity<>(order, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Orders>>getOrdersByDeliveryTime(@RequestParam(value = "startDelivery", required = true) String startDelivery, @RequestParam(value = "endDelivery", required = true) String endDelivery){
+        List<Orders>orders = orderService.findByOrderBewteenDeliveryTime(startDelivery, endDelivery);
+        if(Objects.nonNull(orders)){
+            return new ResponseEntity<>(orders, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(orders, HttpStatus.NOT_FOUND);
     }
 }
 

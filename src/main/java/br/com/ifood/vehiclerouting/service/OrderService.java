@@ -11,7 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -38,5 +45,10 @@ public class OrderService {
 
     public Orders get(Long id){
         return orderRepository.findById(id).orElse(null);
+    }
+
+    public List<Orders> findByOrderBewteenDeliveryTime(String startDevelivery, String endDelivery){
+        List<Orders> orders = orderRepository.findByOrderBewteenDeliveryTime(startDevelivery, endDelivery).orElse(null);;
+        return orders;
     }
 }
