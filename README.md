@@ -2,7 +2,7 @@
 
 Problema de roteamento de veículos, tendo como solução a menor rota entre o restaurantes e clientes.
 
-Segue as informações especificado pelo problema:
+Segue as informações especificado no problema:
 
 - You must consider that:
 - You have limitless drivers. -> but it is better to minimize the number of drivers.
@@ -16,7 +16,7 @@ Segue as informações especificado pelo problema:
 - You should elaborate the algorithm to solve the Vehicle Routing Problem (do not use libraries for that)
 - Hints: your system is growing and the constraints can change, furthermore, new constraints can be added. Prepare your system to be easy to change/configure and easy to add new constraints.
  
-## Non-functional requeriments
+## Non-functional requerimentseu 
  Now consider that your micro-services are a success inside IFood, it must be prepared to be fault tolerant, responsive and resilient.
  Use whatever tools and frameworks you feel comfortable with, and briefly elaborate on your solution, architecture details, choice of patterns and frameworks. The only restriction is to use Java. 
  Also, make it easy to deploy/run your service(s) locally (consider using some container/vm solution for this). We expect that you solve this test in about 8 hours. Once done, share your code with us.
@@ -57,25 +57,26 @@ Qual foi a linha de raciocínio?
 
 - 3- Após o cálculo de todos os pedidos entre a distância do cliente e restaurante, o sistema atribue todos os pedidos de cada restaurante para sua respectiva lista de entregas, assim é possível identificar quantos pedidos cada restaurante tem para ser entregues.
 
-- 4- Respeitando o horário de entrega dos pedidos e tendo a lista de pedidos por restaurante eu ordeno essa lista pelo menor distância para o pedido ser entregue do restaurante até o cliente. 
+- 4- Respeitando o horário de entrega dos pedidos e tendo a lista de pedidos por restaurante, o sistema ordena essa lista pelo menor distância para o pedido ser entregue do restaurante até o cliente. 
 
 - 5- Depois de ordenar a lista e saber quais são os clientes que estão mais pertos do restaurante para entrega, eu atribuo para cada entregador 3 pedidos do mesmo restaurante, quando há mais de 3 pedidos eu solicito um novo entregador para entregar o restante.
 
 Para ter certeza se a distância está correta, você deve criar 1 cliente e 1 restaurante com a mesma latitude e longitude.
 Em seguida você deve cadastrar um pedido associando os 2 com seus respectivos Ids. 
-Consultando a rota '/routes/stats', você conseguirá ver que a distância do restaurante para o cliente tem o valor 0 e timeAverageDelivery (tempo calculado pelo 0.1 units = 5 minutos) é o mesmo do Pickup, neste caso é como se o cliente estivesse no estabelecimento para pegar o pedido.
+Consultando a rota '/routes/stats', você conseguirá ver que a distância do restaurante para o cliente tem o valor 0 e timeAverageDelivery (tempo calculado pelo 0.1 units = 5 minutos até o cliente) é o mesmo do Pickup (momento que o pedido está pronto), neste caso é como se o cliente estivesse no estabelecimento para pegar o pedido e não houvesse distância entre os 2 pontos.
 
-## COMO EXECUTAR A APLICAÇÃO? 
+## COMO EXECUTAR? 
 
-- Necessário Banco de Dados Mysql rodando junto a aplicação, estou disponibilizando um script chamando 'ifood.sql' na raiz do proejeto para criação da database e tables.
+- Necessário Banco de Dados MySql rodando junto a aplicação, disponibilizei um script chamando 'ifood.sql' na raiz do proejeto para criação da database e tables.
 
-- Para alterar senha do Bando de Dados na aplicação, favor acessar o arquivo 'application.properties'
+- Para alterar senha do Bando de Dados na aplicação da sua preferência, favor acessar o arquivo 'application.properties'
+
 
 É possível executar o projeto de 2 modos:
 
 - 1 - Rodando a classe VehicleroutingApplication como Java Application que inicializará todo o contexto do Spring e consequentemente a aplicação.
 
-- 2-  Executando o comando 'mvn spring-boot:run' na raiz do projeto via terminal, que inicializará o tomcat embedded para iniciar o contexto do Spring e a aplicação.
+- 2 - Executando o comando 'mvn spring-boot:run' na raiz do projeto via terminal, que inicializará o tomcat embedded que irá iniciar contexto do Spring e a aplicação.
 
 Após essa etapa o sistema estará disponível na seguinda URL:
 
@@ -83,7 +84,7 @@ Após essa etapa o sistema estará disponível na seguinda URL:
 
 ## SERVIÇOS
 
-Criar Cliente
+- Criar Cliente
 
 Request:
 
@@ -101,7 +102,7 @@ Response Status:
   201 CREATED
   
   
-Atualizar Dados Cliente
+- Atualizar Dados Cliente
 
 Request: 
 
@@ -120,7 +121,7 @@ Response Status:
   204 NO CONTENT
  
   
-Consultar Cliente por Id.
+- Consultar Cliente por Id.
 
 Request:
 
@@ -139,7 +140,7 @@ Response Status:
   200 OK
   
   
-Criar Restaurante
+- Criar Restaurante
 
 Request:
 
@@ -157,7 +158,7 @@ Response Status:
   201 CREATED
   
   
-Atualizar Dados Restaurante
+- Atualizar Dados Restaurante
 
 Request: 
 
@@ -167,7 +168,7 @@ Response: 204
 
 ```json
 {
-	"id" : 1,
+    "id" : 1,
     "lat": 0.1,
     "lon": 1.1
 }
@@ -176,7 +177,7 @@ Response Status:
   204 OK
   
   
-Consultar Restaurante por Id.
+- Consultar Restaurante por Id.
 
 Request:
 
@@ -195,7 +196,7 @@ Response Status:
   200 OK
 
 
-Criar Pedido
+- Criar Pedido
 
 Request:
 
@@ -219,7 +220,7 @@ Response Status:
   201 CREATED
 
 
-Consultar Order por Id.
+- Consultar Order por Id.
 
 Request:
 
@@ -248,7 +249,7 @@ Response Status:
   200 OK
 
 
-Consultar Order por Delivery Time.
+- Consultar Order por Delivery Time.
 
 Request:
 
@@ -281,7 +282,7 @@ Response: 200 (application/json)
 Response Status:
   200 OK
 
-Consultar Rotas de Entrega
+- Consultar Rotas de Entrega
 
 Request:
 
@@ -314,15 +315,12 @@ Response: 200 (application/json)
     ]
 }
 ```
-Response Status:
-  200 OK
-
 
 Response Status:
   200 OK
 
 
-Consultar Stats das Rotas dos Pedidos ordenado por restaurante e distância dos clientes
+- Consultar Stats das Rotas dos Pedidos ordenado por restaurante e distância dos clientes
 
 Request:
 
