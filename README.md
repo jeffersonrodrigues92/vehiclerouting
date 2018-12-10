@@ -23,7 +23,7 @@ Segue as informações especificado no problema:
 
 ## TECNOLOGIAS E PADRÃO DE PROJETO
 
-Sistema foi densenvolvido com requisitos funcionais desacoplados pensando em novas features e manutenção de código.
+Sistema foi desenvolvido com requisitos funcionais desacoplados pensando em novas features e manutenção de código.
 
 Segue algumas especificações:
 
