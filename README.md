@@ -45,25 +45,27 @@ Segue o modelo abaixo para entrada de dados como latitude e longitude para clien
 }
 ```
 
-A solução foi desenvolvida sobre a Fórmula Euclidiana ou conhecida também como Distância Euclidiana, que é responsável por calcular a menor distância em linha reta entre dois pontos.
+A solução foi desenvolvida sobre a Fórmula Euclidiana ou conhecida também como Distância Euclidiana, que é responsável por calcular a menor distância entre dois pontos.
 
 Distância Euclidiana: https://pt.wikipedia.org/wiki/Dist%C3%A2ncia_euclidiana
 
-Qual foi a linha de raciocínio?  
+Mas e aí, qual foi a linha de raciocínio?  
 
-- 1- Primeiramente o sistema valida e busca todos os pedidos disponíveis para entrega, tendo o horário atual maior que o horário Pickup.
+- 1- Primeiramente o sistema valida e busca todos os pedidos disponíveis para entrega, tendo o horário atual maior que o horário Pickup (horário que o pedido está pronto).
 
 - 2- Foi desenvolvido um algoritmo que calcula a distância entre todos os restaurantes e clientes separadamente, tendo como regras 5 minutos para cada 0.1 unidades percorrido.
 
-- 3- Após o cálculo de todos os pedidos entre a distância do cliente e restaurante, o sistema atribui todos os pedidos de cada restaurante para sua respectiva lista de entregas, assim é possível identificar quantos pedidos cada restaurante tem para ser entregues.
+- 3- Após o cálculo de todos os pedidos entre a distância do cliente e restaurante, o sistema atribui todos os pedidos de cada restaurante para sua própria lista, assim é possível identificar quantos pedidos cada restaurante tem para ser entregues.
 
-- 4- Respeitando o horário de entrega dos pedidos e tendo a lista de pedidos por restaurante, o sistema ordena essa lista pela menor distância para o pedido ser entregue do restaurante até o cliente. 
+- 4- Respeitando o horário de entrega dos pedidos e tendo a lista de pedidos por restaurante, o sistema ordena essa lista pela MENOR DISTÂNCIA do restaurante até o cliente. 
 
-- 5- Depois de ordenar a lista e saber quais são os clientes que estão mais pertos do restaurante para entrega, eu atribuo para cada entregador 3 pedidos do mesmo restaurante, quando há mais de 3 pedidos eu solicito um novo entregador para entregar o restante.
+- 5- Depois de ordenar a lista e saber quais são os clientes que estão mais pertos do restaurante para entrega, o sistema atribui para cada entregador 3 pedidos do mesmo restaurante, quando há mais de 3 pedidos eu solicito um novo entregador para entregar o restante.
+
+Como saber se a distância entre o cliente e restaurante está certo?
 
 Para ter certeza se a distância está correta, você deve criar 1 cliente e 1 restaurante com a mesma latitude e longitude.
-Em seguida você deve cadastrar um pedido associando os 2 com seus respectivos Ids. 
-Consultando a rota '/routes/stats', você conseguirá ver que a distância do restaurante para o cliente tem o valor 0 e timeAverageDelivery (tempo calculado pelo 0.1 units = 5 minutos até o cliente) é o mesmo do Pickup (momento que o pedido está pronto), neste caso é como se o cliente estivesse no estabelecimento para pegar o pedido e não houvesse distância entre os 2 pontos.
+Em seguida você deve cadastrar um pedido associando os 2 com seus respectivos Ids que foram gerados. 
+Consultando a rota '/routes/stats', você conseguirá ver que a distância do restaurante para o cliente tem o valor 0 e timeAverageDelivery (tempo calculado por 0.1 units = 5 minutos até o cliente) é o mesmo do Pickup (momento que o pedido está pronto), neste caso é como se o cliente estivesse no estabelecimento para pegar o pedido e não houvesse distância entre os 2 pontos.
 
 ## COMO EXECUTAR? 
 
