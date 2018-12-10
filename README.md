@@ -90,7 +90,7 @@ Após essa etapa o sistema estará disponível na seguinda URL:
 
 Request:
 
-POST http://localhost:8080/client/create
+POST /client/create
 
 Response: 201
 
@@ -108,7 +108,7 @@ Response Status:
 
 Request: 
 
-PUT http://localhost:8080/client/update
+PUT /client/update
 
 Response: 204
 
@@ -127,7 +127,7 @@ Response Status:
 
 Request:
 
-GET http://localhost:8080/client/{id}
+GET /client/{id}
 
 Response: 200 (application/json)
 
@@ -146,7 +146,7 @@ Response Status:
 
 Request:
 
-POST http://localhost:8080/restaurant/create
+POST /restaurant/create
 
 Response: 201
 
@@ -164,7 +164,7 @@ Response Status:
 
 Request: 
 
-PUT http://localhost:8080/restaurant/update
+PUT /restaurant/update
 
 Response: 204
 
@@ -183,7 +183,7 @@ Response Status:
 
 Request:
 
-GET http://localhost:8080/restaurant/{id}
+GET /restaurant/{id}
 
 Response: 200 (application/json)
 
@@ -202,7 +202,7 @@ Response Status:
 
 Request:
 
-POST http://localhost:8080/order/create
+POST /order/create
 
 Response: 201
 
@@ -226,7 +226,7 @@ Response Status:
 
 Request:
 
-GET http://localhost:8080/order/{id}
+GET /order/{id}
 
 Response: 200 (application/json)
 
@@ -255,7 +255,7 @@ Response Status:
 
 Request:
 
-GET http://localhost:8080/order?startDelivery=2018-12-05 00:00:00&endDelivery=2018-12-05 23:59:59
+GET /order?startDelivery=2018-12-05 00:00:00&endDelivery=2018-12-05 23:59:59
 
 - @RequestParam startDelivery : required
 - @RequestParam endDelivery : required
@@ -288,7 +288,7 @@ Response Status:
 
 Request:
 
-GET http://localhost:8080/routes
+GET /routes
 
 Response: 200 (application/json)
 
@@ -326,7 +326,7 @@ Response Status:
 
 Request:
 
-GET http://localhost:8080/routes/stats
+GET /routes/stats
 
 Response: 200 (application/json)
 
