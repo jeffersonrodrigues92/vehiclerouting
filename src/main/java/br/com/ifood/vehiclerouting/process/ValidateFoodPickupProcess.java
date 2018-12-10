@@ -1,6 +1,6 @@
 package br.com.ifood.vehiclerouting.process;
 
-import br.com.ifood.vehiclerouting.entity.Orders;
+import br.com.ifood.vehiclerouting.entity.Order;
 import br.com.ifood.vehiclerouting.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ public class ValidateFoodPickupProcess extends IfoodProcess {
     @Autowired
     private OrderRepository orderRepository;
 
-    public List<Orders> process(){
-        Iterable<Orders> ordersList = orderRepository.findAll();
-        List<Orders> ordersReady = new ArrayList<>();
+    public List<Order> process(){
+        Iterable<Order> ordersList = orderRepository.findAll();
+        List<Order> ordersReady = new ArrayList<>();
 
         ordersList.forEach(order ->{
             if(new Date().equals(order.getPickup()) || new Date().after(order.getPickup())){

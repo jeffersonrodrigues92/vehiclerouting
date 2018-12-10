@@ -1,7 +1,7 @@
 package br.com.ifood.vehiclerouting.controller;
 
 import br.com.ifood.vehiclerouting.response.RouteStatsResponse;
-import br.com.ifood.vehiclerouting.entity.Orders;
+import br.com.ifood.vehiclerouting.entity.Order;
 import br.com.ifood.vehiclerouting.process.AddOrdersDriverProcess;
 import br.com.ifood.vehiclerouting.process.AddOrdersSameRestaurant;
 import br.com.ifood.vehiclerouting.process.CalculateRouteDeliveryProcess;
@@ -45,7 +45,7 @@ public class RouteController {
           calculateRouteDeliveryProcess.setNextIfoodProcess(addOrdersSameRestaurant);
           addOrdersSameRestaurant.setNextIfoodProcess(addOrdersDriverProcess);
 
-          List<Orders> ordersAvailable = validateFoodPickupProcess.process();
+          List<Order> ordersAvailable = validateFoodPickupProcess.process();
           List<RouteStatsResponse> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
           Set<ArrayList<RouteStatsResponse>> routesSameRestaurantsOrders = addOrdersSameRestaurant.process(routesCalculated);
           List<OrderResponse> ordersSameRestaurants = addOrdersDriverProcess.process(routesSameRestaurantsOrders);
@@ -69,7 +69,7 @@ public class RouteController {
 
           validateFoodPickupProcess.setNextIfoodProcess(calculateRouteDeliveryProcess);
 
-          List<Orders> ordersAvailable = validateFoodPickupProcess.process();
+          List<Order> ordersAvailable = validateFoodPickupProcess.process();
           List<RouteStatsResponse> routesCalculated = calculateRouteDeliveryProcess.process(ordersAvailable);
 
           if (routesCalculated.isEmpty()) {

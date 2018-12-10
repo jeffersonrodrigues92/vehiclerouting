@@ -1,7 +1,7 @@
 package br.com.ifood.vehiclerouting.process;
 
 import br.com.ifood.vehiclerouting.response.RouteStatsResponse;
-import br.com.ifood.vehiclerouting.entity.Orders;
+import br.com.ifood.vehiclerouting.entity.Order;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ public class CalculateRouteDeliveryProcess extends IfoodProcess {
     private static final Double UNIT_DISTANCE = 0.1;
     private static final Integer MINUTES_PER_UNIT= 5;
 
-    public List<RouteStatsResponse> process(List<Orders> orders) {
+    public List<RouteStatsResponse> process(List<Order> orders) {
 
         List<RouteStatsResponse> routes = new ArrayList<>();
 

@@ -1,6 +1,4 @@
-package br.com.ifood.vehiclerouting.response;
-
-import org.springframework.http.HttpStatus;
+package br.com.ifood.vehiclerouting.response;import org.springframework.http.HttpStatus;
 
 public class Response {
 
